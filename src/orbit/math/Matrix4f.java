@@ -57,60 +57,37 @@ public class Matrix4f implements Matrix {
 		return result;
 	}
 	
-	public static Matrix4f translate(Vector3f translation, Matrix4f src, Matrix4f dest) {
+	public static Matrix4f translate(Vector2f translation, Matrix4f src, Matrix4f dest) {
 		Matrix4f translationMatrix = new Matrix4f();
 		translationMatrix.setIdentity();
 		
 		translationMatrix.m03 = translation.x;
 		translationMatrix.m13 = translation.y;
-		translationMatrix.m23 = translation.z;
+		translationMatrix.m23 = 0;
 		
 		return multiply(translationMatrix, src, dest);
 	}
 	
-	public static Matrix4f rotate(float pitch, float yaw, float roll, Matrix4f src, Matrix4f dest) {
-		float pitchRad = (float) Math.toRadians(pitch);
-		float yawRad = (float) Math.toRadians(yaw);
-		float rollRad = (float) Math.toRadians(roll);
+	public static Matrix4f rotate(float rotation, Matrix4f src, Matrix4f dest) {
+		float rotationRad = (float) Math.toRadians(-rotation);
+		
 		Matrix4f rotationMatrix = new Matrix4f();
 		rotationMatrix.setIdentity();
-		
-		Matrix4f pitchMatrix = new Matrix4f();
-		pitchMatrix.setIdentity();
-		pitchMatrix.m11 = (float) Math.cos(pitchRad);
-		pitchMatrix.m12 = (float) -Math.sin(pitchRad);
-		pitchMatrix.m21 = (float) Math.sin(pitchRad);
-		pitchMatrix.m22 = (float) Math.cos(pitchRad);
-		
-		Matrix4f yawMatrix = new Matrix4f();
-		yawMatrix.setIdentity();
-		yawMatrix.m00 = (float) Math.cos(yawRad);
-		yawMatrix.m02 = (float) Math.sin(yawRad);
-		yawMatrix.m20 = (float) -Math.sin(yawRad);
-		yawMatrix.m22 = (float) Math.cos(yawRad);
-		
-		Matrix4f rollMatrix = new Matrix4f();
-		rollMatrix.setIdentity();
-		rollMatrix.m00 = (float) Math.cos(rollRad);
-		rollMatrix.m01 = (float) -Math.sin(rollRad);
-		rollMatrix.m10 = (float) Math.sin(rollRad);
-		rollMatrix.m11 = (float) Math.cos(rollRad);
-		
-		multiply(rotationMatrix, yawMatrix, rotationMatrix);
-		multiply(rotationMatrix, pitchMatrix, rotationMatrix);
-		multiply(rotationMatrix, rollMatrix, rotationMatrix);
+		rotationMatrix.m00 = (float) Math.cos(rotationRad);
+		rotationMatrix.m01 = (float) -Math.sin(rotationRad);
+		rotationMatrix.m10 = (float) Math.sin(rotationRad);
+		rotationMatrix.m11 = (float) Math.cos(rotationRad);
 		
 		return multiply(rotationMatrix, src, dest);
 	}
 	
-	public static Matrix4f scale(float scalex, float scaley, float scalez, Matrix4f src, Matrix4f dest) {
+	public static Matrix4f scale(float scalex, float scaley, Matrix4f src, Matrix4f dest) {
 		Matrix4f scaleMatrix = new Matrix4f();
 		
 		scaleMatrix.m00 = scalex;
 		scaleMatrix.m11 = scaley;
-		scaleMatrix.m22 = scalez;
+		scaleMatrix.m22 = 1;
 		scaleMatrix.m33 = 1;
-		
 		
 		return multiply(scaleMatrix, src, dest);
 	}
@@ -131,7 +108,7 @@ public class Matrix4f implements Matrix {
 		perspective.m12 = (top + bottom) / (top - bottom);
 		perspective.m22 = -(far + near) / (far - near);
 		perspective.m23 = -(2 * far * near) / (far - near);
-		perspective.m32 = -1.0f;
+		perspective.m32 = -1;
 		
 		return perspective;
 	}
@@ -139,12 +116,20 @@ public class Matrix4f implements Matrix {
 	public static Matrix4f orthographic(float width, float height) {
 		Matrix4f orthographic = new Matrix4f();
 		
-		orthographic.m00 = 2.0f / width;
-		orthographic.m11 = 2.0f / height;
-		orthographic.m22 = -1.0f;
-		orthographic.m20 = -1.0f;
-		orthographic.m21 = -1.0f;
-		orthographic.m33 = 1.0f;
+		float left = 0;
+		float right = width;
+		float top = 0;
+		float bottom = height;
+		float far = 1;
+		float near = -1;
+		
+		orthographic.m00 = 2 / (right - left);
+		orthographic.m03 = -(right + left) / (right - left);
+		orthographic.m11 = 2 / (top - bottom);
+		orthographic.m13 = -(top + bottom) / (top - bottom);
+		orthographic.m22 = 2 / (far - near);
+		orthographic.m23 = - (far + near) / (far - near);
+		orthographic.m33 = 1;
 		
 		return orthographic;
 	}

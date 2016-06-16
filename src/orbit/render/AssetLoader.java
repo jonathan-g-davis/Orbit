@@ -1,21 +1,8 @@
 package orbit.render;
 
-import static org.lwjgl.opengl.GL11.GL_LINEAR;
-import static org.lwjgl.opengl.GL11.GL_RGBA;
-import static org.lwjgl.opengl.GL11.GL_RGBA8;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_MAG_FILTER;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_MIN_FILTER;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_WRAP_S;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_WRAP_T;
-import static org.lwjgl.opengl.GL11.GL_UNSIGNED_BYTE;
-import static org.lwjgl.opengl.GL11.glTexImage2D;
-import static org.lwjgl.opengl.GL11.glTexParameteri;
-import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
-import static org.lwjgl.opengl.GL12.GL_TEXTURE_WRAP_R;
-import static org.lwjgl.opengl.GL13.GL_TEXTURE_CUBE_MAP;
-import static org.lwjgl.opengl.GL13.GL_TEXTURE_CUBE_MAP_POSITIVE_X;
 import static org.lwjgl.stb.STBImage.stbi_failure_reason;
 import static org.lwjgl.stb.STBImage.stbi_load;
+import static org.lwjgl.stb.STBImage.stbi_set_flip_vertically_on_load;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
@@ -35,6 +22,8 @@ public class AssetLoader {
 		IntBuffer w = BufferUtils.createIntBuffer(1);
 		IntBuffer h = BufferUtils.createIntBuffer(1);
 		IntBuffer comp = BufferUtils.createIntBuffer(1);
+		
+		//stbi_set_flip_vertically_on_load(1);
 		
 		ByteBuffer image = stbi_load("res/textures/" + file, w, h, comp, 4);
 		if (image == null) {

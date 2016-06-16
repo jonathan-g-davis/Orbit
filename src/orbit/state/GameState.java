@@ -2,66 +2,59 @@ package orbit.state;
 
 import static org.lwjgl.glfw.GLFW.GLFW_CURSOR;
 import static org.lwjgl.glfw.GLFW.GLFW_CURSOR_DISABLED;
+import static org.lwjgl.glfw.GLFW.GLFW_CURSOR_NORMAL;
 import static org.lwjgl.glfw.GLFW.glfwSetInputMode;
 
+import orbit.client.Player;
 import orbit.engine.JiveEngine;
-import orbit.entity.Entity;
-import orbit.math.Vector3f;
-import orbit.model.Material;
-import orbit.model.Mesh;
-import orbit.model.MeshLoader;
-import orbit.render.AssetLoader;
+import orbit.entity.Spaceship;
+import orbit.map.Map;
+import orbit.math.Vector2f;
 import orbit.render.Camera;
 import orbit.render.Renderer;
 import orbit.render.shader.StaticShader;
-import orbit.texture.Texture;
 
 public class GameState implements State {
 	
-	StaticShader shader;
-	Entity test;
-	Camera camera;
+	private StaticShader shader;
+	private Map map;
+	private Camera camera;
+	private Player player;
 	
 	public GameState() {
 		shader = new StaticShader();
-		float[] vertices = {
-						-1, 1, 0,
-						1, 1, 0,
-						0, 0, 0
-		};
-		float[] texcoords = {0, 0,
-						1, 0,
-						0.5f, 1};
-		int[] indices = {0, 1, 2};
-		Mesh model = MeshLoader.createMesh(vertices, texcoords, indices);
-		model = MeshLoader.loadMesh("cube.obj");
-		Texture tex = AssetLoader.createTexture("crate.png");
-		Texture tex2 = AssetLoader.createTexture("crate_spec.png");
-		Material material = new Material(tex.getId(), tex2.getId(), 1);
-		test = new Entity(model, material, new Vector3f(0, -0.5f, -2), 0, 0, 0, 1f);
 		
 		camera = new Camera();
-		camera.setPos(new Vector3f(0, 0, 0));
+		camera.setPos(new Vector2f(0, 0));
+		map = new Map();
+		Spaceship ship = new Spaceship();
+		ship.setPosition(new Vector2f(500, 250));
+		player = new Player(ship);
+		map.addObject(ship);
 	}
 
 	@Override
 	public void enter() {
-		glfwSetInputMode(JiveEngine.getWindow().getId(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+		//glfwSetInputMode(JiveEngine.getWindow().getId(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	}
 
 	@Override
 	public void exit() {
-		
+		glfwSetInputMode(JiveEngine.getWindow().getId(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 	}
 
 	@Override
 	public void update(float dt) {
 		camera.update(dt);
+		player.update();
+		map.update(dt);
 	}
 
 	@Override
 	public void render(Renderer renderer) {
 		renderer.clear();
-		renderer.render(test, camera, shader);
+		renderer.setStaticShader(shader);
+		renderer.setCamera(camera);
+		map.render(renderer);
 	}
 }

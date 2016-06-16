@@ -1,12 +1,9 @@
 #version 330 core
 
-in vec3 position;
-in vec2 texcoord;
-in vec3 normal;
+in vec2 position;
+in vec2 texcoords;
 
-out vec3 vertexPos;
-out vec2 textureCoord;
-out vec3 faceNormal;
+out vec2 textureCoords;
 
 uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;
@@ -14,9 +11,7 @@ uniform mat4 projectionMatrix;
 
 void main() {
 
-	vertexPos = vec3(modelMatrix * vec4(position, 1));
-	textureCoord = texcoord;
-	faceNormal = mat3(transpose(inverse(modelMatrix))) * normal;
-	
-	gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
+	textureCoords = texcoords;
+
+	gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 0.0, 1.0);
 }

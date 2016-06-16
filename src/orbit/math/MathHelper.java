@@ -8,13 +8,13 @@ public class MathHelper {
 		return d;
 	}
 	
-	public static Matrix4f createTransformationMatrix(Vector3f translation, float pitch, float yaw, float roll, float scale) {
+	public static Matrix4f createTransformationMatrix(Vector2f translation, float rotation, float scale) {
 		Matrix4f matrix = new Matrix4f();
 		matrix.setIdentity();
 		
 		Matrix4f.translate(translation, matrix, matrix);
-		Matrix4f.rotate(pitch, yaw, roll, matrix, matrix);
-		Matrix4f.scale(scale, scale, scale, matrix, matrix);
+		Matrix4f.rotate(rotation, matrix, matrix);
+		Matrix4f.scale(scale, scale, matrix, matrix);
 		
 		return matrix;
 	}

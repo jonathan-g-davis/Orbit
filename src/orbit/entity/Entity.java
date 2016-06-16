@@ -1,58 +1,62 @@
 package orbit.entity;
 
-import orbit.math.Vector3f;
-import orbit.model.Material;
+import orbit.math.Vector2f;
 import orbit.model.Mesh;
+import orbit.texture.Texture;
 
 public class Entity {
 	
 	private Mesh model;
-	private Material material;
-	private Vector3f position;
-	private float pitch;
-	private float yaw;
-	private float roll;
-	private float scale;
+	private Texture texture;
+	protected Vector2f position;
+	protected float rotation;
+	protected float scale;
 	
-	public Entity(Mesh mesh, Material material) {
+	public Entity(Mesh mesh, Texture texture) {
 		this.model = mesh;
-		this.material = material;
-		this.position = new Vector3f();
+		this.texture = texture;
+		this.position = new Vector2f();
 		this.scale = 1;
 	}
 	
-	public Entity(Mesh mesh, Material material, Vector3f position, float pitch, float yaw, float roll, float scale) {
+	public Entity(Mesh mesh, Texture texture, Vector2f position, float rotation, float scale) {
 		this.model = mesh;
-		this.material = material;
+		this.texture = texture;
 		this.position = position;
-		this.pitch = pitch;
-		this.yaw = yaw;
-		this.roll = roll;
+		this.rotation = rotation;
 		this.scale = scale;
 	}
 	
+	public void setTexture(Texture texture) {
+		this.texture = texture;
+	}
+	
+	public void setPosition(Vector2f position) {
+		this.position = position;
+	}
+
+	public void setRotation(float rotation) {
+		this.rotation = rotation;
+	}
+
+	public void setScale(float scale) {
+		this.scale = scale;
+	}
+
 	public Mesh getMesh() {
 		return model;
 	}
 	
-	public Material getMaterial() {
-		return material;
+	public Texture getTexture() {
+		return texture;
 	}
 
-	public Vector3f getPos() {
+	public Vector2f getPos() {
 		return position;
 	}
 
-	public float getPitch() {
-		return pitch;
-	}
-
-	public float getYaw() {
-		return yaw;
-	}
-
-	public float getRoll() {
-		return roll;
+	public float getRotation() {
+		return rotation;
 	}
 	
 	public float getScale() {
