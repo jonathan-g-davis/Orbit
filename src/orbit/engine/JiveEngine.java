@@ -27,6 +27,7 @@ public class JiveEngine {
 	private static GLFWErrorCallback errorCallback;
 	private static GLFWKeyCallback keyCallback;
 	private static GLFWCursorPosCallback cursorCallback;
+	private static Clock clock;
 	private static Window window;
 	private static Renderer renderer;
 	private static StateController stateController;
@@ -65,6 +66,8 @@ public class JiveEngine {
 		cursorCallback = new CursorHandler();
 		glfwSetCursorPosCallback(window.getId(), cursorCallback);
 		
+		clock = new Clock();
+		
 		renderer = new Renderer();
 		renderer.init();
 		
@@ -88,7 +91,7 @@ public class JiveEngine {
 		while (running) {
 			
 			input();
-			update((float) Clock.getDeltaTime());
+			update((float) clock.getDeltaTime());
 			render();
 			
 			if (window.shouldWindowClose()) {

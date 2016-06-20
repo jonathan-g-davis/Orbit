@@ -8,15 +8,13 @@ public class Entity {
 	
 	private Mesh model;
 	private Texture texture;
-	protected Vector2f position;
-	protected float rotation;
-	protected float scale;
+	protected Vector2f position = new Vector2f();
+	protected float rotation = 0;
+	protected float scale = 1;
 	
 	public Entity(Mesh mesh, Texture texture) {
 		this.model = mesh;
 		this.texture = texture;
-		this.position = new Vector2f();
-		this.scale = 1;
 	}
 	
 	public Entity(Mesh mesh, Texture texture, Vector2f position, float rotation, float scale) {

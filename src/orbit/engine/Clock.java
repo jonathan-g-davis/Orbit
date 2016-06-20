@@ -4,13 +4,13 @@ import static org.lwjgl.glfw.GLFW.glfwGetTime;
 
 public class Clock {
 	
-	private static double lastExecution;
+	private double lastExecution = 0;
 	
 	public static double getTime() {
 		return glfwGetTime();
 	}
 	
-	public static double getDeltaTime() {
+	public double getDeltaTime() {
 		double dt = getTime() - lastExecution;
 		lastExecution = getTime();
 		return dt;

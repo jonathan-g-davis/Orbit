@@ -1,6 +1,5 @@
 package orbit.render;
 
-import orbit.input.CursorHandler;
 import orbit.math.Matrix4f;
 import orbit.math.Vector2f;
 
@@ -8,26 +7,30 @@ public class Camera {
 	
 	private Vector2f position;
 	
-	private double mouseX = 0;
-	private double mouseY = 0;
+	private float zoom = 1;
 	
 	public Camera() {
 		position = new Vector2f();
 	}
 	
 	public void update(float dt) {
-		double dx = CursorHandler.getXpos() - mouseX;
-		double dy = CursorHandler.getYpos() - mouseY;
-		mouseX = CursorHandler.getXpos();
-		mouseY = CursorHandler.getYpos();
+		zoom += dt;
 	}
 	
 	public void setPos(Vector2f pos) {
 		this.position = pos;
 	}
 	
+	public void setZoom(float zoom) {
+		this.zoom = zoom;
+	}
+	
 	public Vector2f getPos() {
 		return position;
+	}
+	
+	public float getZoom() {
+		return zoom;
 	}
 	
 	public Matrix4f getViewMatrix() {

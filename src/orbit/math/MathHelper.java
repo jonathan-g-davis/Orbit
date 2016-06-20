@@ -2,6 +2,12 @@ package orbit.math;
 
 public class MathHelper {
 	
+	public static float clamp_f(float f, float min, float max) {
+		if (f < min) return min;
+		if (f > max) return max;
+		return f;
+	}
+	
 	public static double clamp_d(double d, double min, double max) {
 		if (d < min) return min;
 		if (d > max) return max;

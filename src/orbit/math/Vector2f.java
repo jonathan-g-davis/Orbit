@@ -46,10 +46,16 @@ public class Vector2f implements Vector {
 		return a.x * b.x + a.y * b.y;
 	}
 
-	public static void copy(Vector2f src, Vector2f dest) {
+	public static Vector2f copy(Vector2f src, Vector2f dest) {
 		if (dest != null) {
 			dest.x = src.x;
 			dest.y = src.y;
+			return dest;
+		} else {
+			Vector2f clone = new Vector2f();
+			clone.x = src.x;
+			clone.y = src.y;
+			return clone;
 		}
 	}
 	
@@ -57,6 +63,4 @@ public class Vector2f implements Vector {
 	public String toString() {
 		return "Vector3f<"+x+", "+y+">";
 	}
-
-
 }
