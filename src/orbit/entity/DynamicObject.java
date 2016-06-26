@@ -1,13 +1,13 @@
 package orbit.entity;
 
-import orbit.math.Rectangle;
+import orbit.math.Circle;
 import orbit.math.Vector2f;
 import orbit.model.Mesh;
 import orbit.texture.Texture;
 
 public abstract class DynamicObject extends Entity {
 	
-	private Rectangle bounds;
+	private Circle bounds;
 	
 	protected float health = 100;
 	protected Vector2f netForce = new Vector2f();
@@ -19,11 +19,11 @@ public abstract class DynamicObject extends Entity {
 	protected float angVelocity = 0;
 	protected float momentOfInertia;
 	
-	public DynamicObject(Mesh mesh, Texture texture, int width, int height, float mass) {
+	public DynamicObject(Mesh mesh, Texture texture, float collisionRadius, float mass) {
 		super(mesh, texture);
-		this.bounds = new Rectangle(position.x - width, position.y - height, position.x + width, position.y + height);
+		this.bounds = new Circle(position.x, position.y, collisionRadius);
 		this.mass = mass;
-		this.momentOfInertia = (2.0f/5.0f) * mass * (width * width + height * height);
+		this.momentOfInertia = (2.0f/5.0f) * mass * collisionRadius * collisionRadius;
 	}
 	
 	public void checkCollision(DynamicObject other) {
@@ -31,24 +31,17 @@ public abstract class DynamicObject extends Entity {
 		if (other instanceof Projectile) {
 			if (!((Projectile) other).isActive()) return;
 		}
-		Rectangle oBounds = other.getBounds();
 		
-		float xmin1 = bounds.getXMin();
-		float xmax1 = bounds.getXMax();
-		float ymin1 = bounds.getYMin();
-		float ymax1 = bounds.getYMax();
-		float xmin2 = oBounds.getXMin();
-		float xmax2 = oBounds.getXMax();
-		float ymin2 = oBounds.getYMin();
-		float ymax2 = oBounds.getYMax();
-		
-		boolean xCollide = xmax1 > xmin2 && xmin1 < xmax2;
-		boolean yCollide = ymax1 > ymin2 && ymin1 < ymax2;
-		if (xCollide && yCollide) {
-			this.health = 0;
-			other.health = 0;
-			System.out.println(this + " " + other);
-			System.out.println(xmin1 + " " + xmax1 + "\t" + xmin2 + " " + xmax2);
+		float distance = Vector2f.sub(other.position, position, null).magnitude();
+		boolean collide = distance < getRadius() || distance < other.getRadius();
+		if (collide) {
+			if (other instanceof Projectile) {
+				this.health -= ((Projectile) other).getDamage();
+				other.setHealth(0);
+			} else {
+				this.health = 0;
+				other.health = 0;
+			}
 		}
 	}
 	
@@ -69,9 +62,6 @@ public abstract class DynamicObject extends Entity {
 	}
 	
 	public void update(float dt) {
-		bounds.setX(position.x - bounds.getWidth() / 2);
-		bounds.setY(position.y - bounds.getHeight() / 2);
-		
 		Vector2f accel = new Vector2f(netForce.x / mass, netForce.y / mass);
 		applyAcceleration(accel);
 		netForce.x = 0;
@@ -90,6 +80,9 @@ public abstract class DynamicObject extends Entity {
 		angAcceleration = 0;
 		rotation += Math.toDegrees(angVelocity * dt);
 		rotation = rotation % 360f;
+		
+		bounds.setX(position.x);
+		bounds.setY(position.y);
 	}
 	
 	public float getHealth() {
@@ -120,15 +113,11 @@ public abstract class DynamicObject extends Entity {
 		return angVelocity;
 	}
 	
-	public int getWidth() {
-		return (int) bounds.getWidth();
+	public float getRadius() {
+		return bounds.getRadius();
 	}
 	
-	public int getHeight() {
-		return (int) bounds.getHeight();
-	}
-	
-	public Rectangle getBounds() {
+	public Circle getBounds() {
 		return bounds;
 	}
 	
@@ -142,8 +131,12 @@ public abstract class DynamicObject extends Entity {
 	
 	@Override
 	public void setPosition(Vector2f position) {
-		bounds.setX(position.x - bounds.getWidth() / 2);
-		bounds.setY(position.y - bounds.getHeight() / 2);
+		bounds.setX(position.x);
+		bounds.setY(position.y);
 		super.setPosition(position);
+	}
+	
+	public void setHealth(float health) {
+		this.health = health;
 	}
 }

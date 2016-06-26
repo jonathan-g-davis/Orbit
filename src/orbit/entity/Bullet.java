@@ -8,20 +8,24 @@ import orbit.texture.Texture;
 
 public class Bullet extends Projectile {
 	
+	private static final int RADIUS = 4;
+	private static final int WIDTH = 4;
+	private static final int HEIGHT = 8;
+	private static final Mesh MESH = MeshLoader.createQuadFromCenter(new Vector2f(WIDTH, HEIGHT));
+	private static final Texture TEXTURE = AssetLoader.createTexture("bullet.png");
+	private static final int MASS = 10;
 	
-	public static final int WIDTH = 8;
-	public static final int HEIGHT = 16;
-	public static final Mesh MESH = MeshLoader.createQuadFromCenter(new Vector2f(WIDTH, HEIGHT));
-	public static final Texture TEXTURE = AssetLoader.createTexture("bullet.png");
-	public static final int MASS = 10;
+	private static final float ACTIVE = 0.1f;
+	private static final float DAMAGE = 11f;
 	
 	public Bullet(Vector2f position, float rotation, Vector2f velocity, Vector2f force) {
-		super(MESH, TEXTURE, WIDTH, HEIGHT, MASS);
+		super(MESH, TEXTURE, RADIUS, MASS);
 		this.position = position;
 		this.rotation = rotation;
 		this.velocity = velocity;
 		this.applyForce(force);
-		Bullet.active = 0.1f;
+		Bullet.active = ACTIVE;
+		Bullet.damage = DAMAGE;
 	}
 	
 	@Override

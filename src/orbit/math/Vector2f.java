@@ -14,6 +14,11 @@ public class Vector2f implements Vector {
 		this.y = y;
 	}
 	
+	public Vector2f(Vector2i vec) {
+		this.x = vec.x;
+		this.y = vec.y;
+	}
+	
 	public float magnitude() {
 		return (float) Math.sqrt(x * x + y * y);
 	}

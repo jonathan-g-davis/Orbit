@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import orbit.entity.DynamicObject;
+import orbit.math.Circle;
 import orbit.math.Rectangle;
 
 public class QuadTree {
@@ -54,15 +55,15 @@ public class QuadTree {
 		nodes[SOUTHEAST] = new QuadTree(level + 1, new Rectangle(x + width, y + height, width, height));
 	}
 	
-	private int getIndex(Rectangle object) {
+	private int getIndex(Circle object) {
 		int index = -1;
 		float xMid = bounds.getX() + bounds.getWidth() / 2;
 		float yMid = bounds.getY() + bounds.getHeight() / 2;
 		
-		boolean top = object.getY() < yMid && object.getY() + object.getHeight() < yMid;
-		boolean bottom = object.getY() > yMid && object.getY() + object.getHeight() > yMid;
-		boolean left = object.getX() < xMid && object.getX() + object.getWidth() < xMid;
-		boolean right = object.getX() > xMid && object.getX() + object.getWidth() > xMid;
+		boolean top = object.getY() - object.getRadius() < yMid && object.getY() + object.getRadius() < yMid;
+		boolean bottom = object.getY() - object.getRadius() > yMid && object.getY() + object.getRadius() > yMid;
+		boolean left = object.getX() - object.getRadius() < xMid && object.getX() + object.getRadius() < xMid;
+		boolean right = object.getX() - object.getRadius() > xMid && object.getX() + object.getRadius() > xMid;
 		
 		if (top) {
 			if (left) {

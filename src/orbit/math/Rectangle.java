@@ -6,7 +6,6 @@ public class Rectangle {
 	private float y;
 	private float width;
 	private float height;
-	private float rotation;
 	private Vector2f[] vertices = new Vector2f[4];
 	
 	public Rectangle(float x, float y, float width, float height) {
@@ -53,11 +52,6 @@ public class Rectangle {
 
 	public void setHeight(float height) {
 		this.height = height;
-		recalculateVertices();
-	}
-	
-	public void setRotation(float rotation) {
-		this.rotation = rotation;
 		recalculateVertices();
 	}
 	

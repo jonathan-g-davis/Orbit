@@ -7,6 +7,8 @@ import static org.lwjgl.glfw.GLFW.glfwSetInputMode;
 import orbit.client.Player;
 import orbit.engine.JiveEngine;
 import orbit.entity.Spaceship;
+import orbit.entity.weapon.GatlingGun;
+import orbit.entity.weapon.RocketLauncher;
 import orbit.map.Map;
 import orbit.math.Vector2f;
 import orbit.render.Renderer;
@@ -22,13 +24,14 @@ public class GameState implements State {
 		shader = new StaticShader();
 		
 		map = new Map();
-		Spaceship ship = new Spaceship();
-		ship.setPosition(new Vector2f(1280, 360));
-		ship.applyForce(new Vector2f(0, -100000));
+		Spaceship ship = new Spaceship(new GatlingGun());
+		ship.setPosition(new Vector2f(1000, 0));
+		ship.applyForce(new Vector2f(0, -200000));
 		player = new Player(ship);
 		map.addObject(ship);
-		ship = new Spaceship();
-		ship.applyForce(new Vector2f(-10000, 100000));
+		ship = new Spaceship(new GatlingGun());
+		ship.setPosition(new Vector2f(-1000, 0));
+		ship.applyForce(new Vector2f(0, 200000));
 		map.addObject(ship);
 	}
 
@@ -45,6 +48,7 @@ public class GameState implements State {
 	@Override
 	public void update(float dt) {
 		player.update(map);
+		JiveEngine.getWindow().setTitle(""+player.getHealth());
 		map.update(dt);
 	}
 

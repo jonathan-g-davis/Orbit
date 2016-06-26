@@ -3,14 +3,12 @@ package orbit.map;
 import java.util.ArrayList;
 import java.util.List;
 
-import orbit.engine.JiveEngine;
 import orbit.entity.DynamicObject;
 import orbit.entity.Planet;
-import orbit.entity.Projectile;
 import orbit.entity.collision.QuadTree;
+import orbit.math.Circle;
 import orbit.math.Rectangle;
 import orbit.math.Vector2f;
-import orbit.model.MeshLoader;
 import orbit.render.AssetLoader;
 import orbit.render.Renderer;
 
@@ -18,10 +16,10 @@ public class Map {
 	
 	private static final int SIZE = 10000;
 	
-	private Rectangle bounds = new Rectangle(-SIZE / 2, -SIZE / 2, SIZE, SIZE);
-	private QuadTree quadTree = new QuadTree(bounds);
+	private Circle bounds = new Circle(0, 0, SIZE);
+	private QuadTree quadTree = new QuadTree(new Rectangle(-SIZE / 2, -SIZE / 2, SIZE, SIZE));
 	private List<DynamicObject> objects = new ArrayList<DynamicObject>();
-	private Planet planet = new Planet(MeshLoader.createQuadFromCenter(new Vector2f(250, 250)), AssetLoader.createTexture("spaceship.png"), new Vector2f(500, 250), 1, 100);
+	private Planet planet = new Planet(250, AssetLoader.createTexture("earth.png"), new Vector2f(0, 0), 100);
 	
 	public void addObject(DynamicObject object) {
 		if (object != null) {
@@ -31,12 +29,10 @@ public class Map {
 	
 	public void update(float dt) {
 		quadTree.clear();
-		int count = 0;
+		
 		for (DynamicObject object : objects) {
 			quadTree.insert(object);
-			if (object instanceof Projectile) count++;
 		}
-		JiveEngine.getWindow().setTitle(count+"");
 		
 		int i = 0;
 		List<DynamicObject> collisionlist = new ArrayList<DynamicObject>();
@@ -48,6 +44,7 @@ public class Map {
 			} else {
 				quadTree.retrieve(collisionlist, object);
 				
+				planet.checkCollision(object);
 				for (DynamicObject o : collisionlist) {
 					object.checkCollision(o);
 				}
@@ -68,11 +65,6 @@ public class Map {
 	}
 	
 	private boolean inBounds(DynamicObject object) {
-		Rectangle oBounds = object.getBounds();
-		
-		boolean fitX = oBounds.getX() > bounds.getX() && oBounds.getX() + oBounds.getWidth() < bounds.getX() + bounds.getWidth();
-		boolean fitY = oBounds.getY() > bounds.getY() && oBounds.getY() + oBounds.getHeight() < bounds.getY() + bounds.getHeight();
-		
-		return fitX && fitY;
+		return Vector2f.sub(object.getPos(), new Vector2f(), null).magnitude() + object.getRadius() < bounds.getRadius();
 	}
 }

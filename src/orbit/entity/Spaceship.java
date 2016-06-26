@@ -1,5 +1,7 @@
 package orbit.entity;
 
+import orbit.entity.weapon.Weapon;
+import orbit.map.Map;
 import orbit.math.MathHelper;
 import orbit.math.RotationalPID;
 import orbit.math.Vector2f;
@@ -10,33 +12,36 @@ import orbit.texture.Texture;
 
 public class Spaceship extends DynamicObject {
 	
+	private static final int RADIUS = 32;
 	private static final int SIZE = 64;
 	private static final float MASS = 1000;
 	private static final Mesh MESH = MeshLoader.createQuadFromCenter(new Vector2f(SIZE, SIZE));
 	private static final Texture TEXTURE = AssetLoader.createTexture("spaceship.png");
 	
-	private static final float THRUST_FORCE = 200000;
-	private static final float RCS_FORCE = 50000;
+	private static final float THRUST_FORCE = 100000;
+	//private static final float RCS_FORCE = 50000;
 	private static final float GYRO_TORQUE = 100000;
 
+	protected Weapon weapon;
 	protected RotationalPID pid = new RotationalPID();
 	
-	public Spaceship() {
-		super(MESH, TEXTURE, SIZE, SIZE, MASS);
+	public Spaceship(Weapon weapon) {
+		super(MESH, TEXTURE, RADIUS, MASS);
+		this.weapon = weapon;
 		
 		pid.setProportionalConstant(0.7f);
 		pid.setDerivativeTime(0.6f);
 		pid.setIntegralTime(0.0f);
 	}
 	
-	public Projectile fire() {
+	public void fire(Map map) {
 		if (health > 0) {
 			Vector2f dir = new Vector2f((float) -Math.sin(Math.toRadians(rotation)), (float) -Math.cos(Math.toRadians(rotation)));
+			Vector2f.normalize(dir, dir);
 			Vector2f pos = Vector2f.add(Vector2f.mul(SIZE/2, dir, null), position, null);
-			Bullet bullet = new Bullet(pos, rotation + 90, Vector2f.copy(velocity, null), Vector2f.mul(200000, dir, null));
-			return bullet;
+			weapon.fire(pos, rotation, velocity, map);
 		} else {
-			return null;
+			return;
 		}
 	}
 	
@@ -55,10 +60,5 @@ public class Spaceship extends DynamicObject {
 	@Override
 	public void update(float dt) {
 		super.update(dt);
-		/*if (position.x < 0 && velocity.x < 0) velocity.x*=-1;
-		if (position.x > 1280 && velocity.x > 0) velocity.x*=-1;
-		if (position.y < 0 && velocity.y < 0) velocity.y*=-1;
-		if (position.y > 720 && velocity.y > 0) velocity.y*=-1;*/
-		
 	}
 }

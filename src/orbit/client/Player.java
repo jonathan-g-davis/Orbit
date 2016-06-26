@@ -35,10 +35,14 @@ public class Player {
 			ship.thrust();
 		}
 		if (KeyHandler.isKeyDown(GLFW.GLFW_KEY_SPACE)) {
-			map.addObject(ship.fire());
+			ship.fire(map);
 		}
 		if (ship.getHealth() > 0) camera.setPos(Vector2f.sub(ship.getPos(), new Vector2f(640, 360), null));
 		else camera.setPos(new Vector2f(0, 0));
+	}
+	
+	public String getName() {
+		return name;
 	}
 	
 	public Spaceship getSpaceship() {
@@ -47,5 +51,9 @@ public class Player {
 	
 	public Camera getCamera() {
 		return camera;
+	}
+	
+	public float getHealth() {
+		return ship.getHealth();
 	}
 }
