@@ -20,7 +20,7 @@ public class RocketLauncher extends Weapon {
 	public void fire(Vector2f pos, float rotation, Vector2f velocity, Map map) {
 		if (canFire()) {
 			Vector2f dir = new Vector2f((float) -Math.sin(Math.toRadians(rotation)), (float) -Math.cos(Math.toRadians(rotation)));
-			Rocket rocket = new Rocket(pos, rotation, Vector2f.copy(velocity, null), Vector2f.mul(1000000, dir, null));
+			Rocket rocket = new Rocket(pos, rotation, Vector2f.copy(velocity, null), Vector2f.mul(10000, dir, null));
 			map.addObject(rocket);
 		}
 	}

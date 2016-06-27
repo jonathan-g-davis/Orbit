@@ -2,31 +2,7 @@ package orbit.render.shader;
 
 import static org.lwjgl.opengl.GL11.GL_FLOAT;
 import static org.lwjgl.opengl.GL11.GL_TRUE;
-import static org.lwjgl.opengl.GL20.GL_FRAGMENT_SHADER;
-import static org.lwjgl.opengl.GL20.GL_LINK_STATUS;
-import static org.lwjgl.opengl.GL20.GL_VERTEX_SHADER;
-import static org.lwjgl.opengl.GL20.glAttachShader;
-import static org.lwjgl.opengl.GL20.glBindAttribLocation;
-import static org.lwjgl.opengl.GL20.glCompileShader;
-import static org.lwjgl.opengl.GL20.glCreateProgram;
-import static org.lwjgl.opengl.GL20.glCreateShader;
-import static org.lwjgl.opengl.GL20.glDeleteProgram;
-import static org.lwjgl.opengl.GL20.glDeleteShader;
-import static org.lwjgl.opengl.GL20.glDetachShader;
-import static org.lwjgl.opengl.GL20.glDisableVertexAttribArray;
-import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
-import static org.lwjgl.opengl.GL20.glGetAttribLocation;
-import static org.lwjgl.opengl.GL20.glGetProgramInfoLog;
-import static org.lwjgl.opengl.GL20.glGetProgrami;
-import static org.lwjgl.opengl.GL20.glGetUniformLocation;
-import static org.lwjgl.opengl.GL20.glLinkProgram;
-import static org.lwjgl.opengl.GL20.glShaderSource;
-import static org.lwjgl.opengl.GL20.glUniform1f;
-import static org.lwjgl.opengl.GL20.glUniform1i;
-import static org.lwjgl.opengl.GL20.glUniform3f;
-import static org.lwjgl.opengl.GL20.glUniformMatrix4fv;
-import static org.lwjgl.opengl.GL20.glUseProgram;
-import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
+import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.glBindFragDataLocation;
 
 import java.io.BufferedReader;
@@ -39,6 +15,7 @@ import org.lwjgl.BufferUtils;
 
 import orbit.math.Matrix4f;
 import orbit.math.Vector3f;
+import orbit.math.Vector4f;
 
 public abstract class ShaderProgram {
 	
@@ -115,6 +92,10 @@ public abstract class ShaderProgram {
 	
 	public void setUniform(int location, float value) {
 		glUniform1f(location, value);
+	}
+	
+	public void setUniform(int location, Vector4f value) {
+		glUniform4f(location, value.x, value.y, value.z, value.w);
 	}
 	
 	public void setUniform(int location, int value) {

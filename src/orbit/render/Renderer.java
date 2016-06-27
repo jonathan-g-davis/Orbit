@@ -23,6 +23,7 @@ import orbit.entity.Entity;
 import orbit.math.MathHelper;
 import orbit.math.Matrix4f;
 import orbit.model.Mesh;
+import orbit.particle.Particle;
 import orbit.render.shader.StaticShader;
 
 public class Renderer {
@@ -63,6 +64,7 @@ public class Renderer {
 		entity.getTexture().bind();
 		Matrix4f transformationMatrix = MathHelper.createTransformationMatrix(entity.getPos(), entity.getRotation(), entity.getScale());
 		shader.loadModelMatrix(transformationMatrix);
+		shader.loadColor(entity.getColor());
 		
 		mesh.bind();
 		shader.enableAttribute(0);
@@ -73,6 +75,30 @@ public class Renderer {
 		shader.disableAttribute(0);
 		shader.disableAttribute(1);
 		entity.getTexture().unbind();
+		mesh.unbind();
+		
+		shader.stop();
+	}
+	
+	public void render(Particle particle) {
+		shader.start();
+		shader.loadViewMatrix(camera);
+		shader.loadProjectionMatrix(projectionMatrix);
+		Mesh mesh = Particle.getMesh();
+		particle.getTexture().bind();
+		Matrix4f transformationMatrix = MathHelper.createTransformationMatrix(particle.getPos(), particle.getAngle(), particle.getScale());
+		shader.loadModelMatrix(transformationMatrix);
+		shader.loadColor(particle.getColor());
+		
+		mesh.bind();
+		shader.enableAttribute(0);
+		shader.enableAttribute(1);
+		
+		glDrawElements(GL_TRIANGLES, mesh.getNumVertices(), GL_UNSIGNED_INT, 0);
+		
+		shader.disableAttribute(0);
+		shader.disableAttribute(1);
+		particle.getTexture().unbind();
 		mesh.unbind();
 		
 		shader.stop();

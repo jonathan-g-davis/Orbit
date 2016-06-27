@@ -1,6 +1,7 @@
 package orbit.render.shader;
 
 import orbit.math.Matrix4f;
+import orbit.math.Vector4f;
 import orbit.render.Camera;
 
 public class StaticShader extends ShaderProgram {
@@ -11,6 +12,8 @@ public class StaticShader extends ShaderProgram {
 	private int modelMatrix_location;
 	private int viewMatrix_location;
 	private int projectionMatrix_location;
+	
+	private int color_location;
 	
 	public StaticShader() {
 		super(VERTEX_SHADER, FRAGMENT_SHADER);
@@ -27,6 +30,7 @@ public class StaticShader extends ShaderProgram {
 		modelMatrix_location = getUniform("modelMatrix");
 		viewMatrix_location = getUniform("viewMatrix");
 		projectionMatrix_location = getUniform("projectionMatrix");
+		color_location = getUniform("objColor");
 	}
 	
 	public void loadProjectionMatrix(Matrix4f projectionMatrix) {
@@ -39,5 +43,9 @@ public class StaticShader extends ShaderProgram {
 	
 	public void loadModelMatrix(Matrix4f modelMatrix) {
 		setUniform(modelMatrix_location, modelMatrix);
+	}
+	
+	public void loadColor(Vector4f color) {
+		setUniform(color_location, color);
 	}
 }

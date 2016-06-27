@@ -88,6 +88,7 @@ public class JiveEngine {
 	}
 	
 	private static void gameLoop() {
+		
 		while (running) {
 			
 			input();

@@ -59,7 +59,7 @@ public class Map {
 		renderer.render(planet);
 		for (DynamicObject object : objects) {
 			if (object != null) {
-				renderer.render(object);
+				object.render(renderer);
 			}
 		}
 	}

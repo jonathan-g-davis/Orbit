@@ -24,7 +24,7 @@ public class GameState implements State {
 		shader = new StaticShader();
 		
 		map = new Map();
-		Spaceship ship = new Spaceship(new GatlingGun());
+		Spaceship ship = new Spaceship(new RocketLauncher());
 		ship.setPosition(new Vector2f(1000, 0));
 		ship.applyForce(new Vector2f(0, -200000));
 		player = new Player(ship);
@@ -47,9 +47,8 @@ public class GameState implements State {
 
 	@Override
 	public void update(float dt) {
-		player.update(map);
-		JiveEngine.getWindow().setTitle(""+player.getHealth());
 		map.update(dt);
+		player.update(map);
 	}
 
 	@Override

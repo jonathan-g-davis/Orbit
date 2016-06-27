@@ -1,5 +1,8 @@
 package orbit.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import orbit.entity.weapon.Weapon;
 import orbit.map.Map;
 import orbit.math.MathHelper;
@@ -7,7 +10,9 @@ import orbit.math.RotationalPID;
 import orbit.math.Vector2f;
 import orbit.model.Mesh;
 import orbit.model.MeshLoader;
+import orbit.particle.ParticleSystem;
 import orbit.render.AssetLoader;
+import orbit.render.Renderer;
 import orbit.texture.Texture;
 
 public class Spaceship extends DynamicObject {
@@ -22,12 +27,27 @@ public class Spaceship extends DynamicObject {
 	//private static final float RCS_FORCE = 50000;
 	private static final float GYRO_TORQUE = 100000;
 
+	protected ParticleSystem particleSystem;
 	protected Weapon weapon;
 	protected RotationalPID pid = new RotationalPID();
 	
 	public Spaceship(Weapon weapon) {
 		super(MESH, TEXTURE, RADIUS, MASS);
 		this.weapon = weapon;
+		
+		List<String> textures = new ArrayList<String>();
+		textures.add("smoke_1.png");
+		textures.add("smoke_2.png");
+		textures.add("smoke_3.png");
+		particleSystem = new ParticleSystem(textures);
+		particleSystem.setParticlesPerSecond(50);
+		particleSystem.setParticleVelocity(0);
+		particleSystem.setScale(20);
+		particleSystem.setParticleLife(2);
+		particleSystem.setAngleVariance(15);
+		particleSystem.setLifeVariance(1);
+		particleSystem.setVelocityVariance(0);
+		particleSystem.setScaleVariance(10);
 		
 		pid.setProportionalConstant(0.7f);
 		pid.setDerivativeTime(0.6f);
@@ -58,7 +78,17 @@ public class Spaceship extends DynamicObject {
 	}
 	
 	@Override
+	public void render(Renderer renderer) {
+		particleSystem.render(renderer);
+		super.render(renderer);
+	}
+	
+	@Override
 	public void update(float dt) {
+		Vector2f dir = new Vector2f((float) -Math.sin(Math.toRadians(rotation)), (float) -Math.cos(Math.toRadians(rotation)));
+		particleSystem.setPosition(Vector2f.add(Vector2f.mul(-SIZE / 2, dir, null), position, null));
+		particleSystem.setAngle(this.rotation);
+		particleSystem.update(dt);
 		super.update(dt);
 	}
 }
