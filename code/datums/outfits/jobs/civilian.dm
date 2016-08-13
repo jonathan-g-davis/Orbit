@@ -59,3 +59,21 @@
 	l_hand = /obj/item/weapon/storage/bible
 	id_type = /obj/item/weapon/card/id/civilian/chaplain
 	pda_type = /obj/item/device/pda/chaplain
+
+/decl/hierarchy/outfit/job/clown
+	name = OUTFIT_JOB_NAME("Clown")
+	uniform = /obj/item/clothing/under/rank/clown
+	mask = /obj/item/clothing/mask/gas/clown_hat
+	shoes = /obj/item/clothing/shoes/clown_shoes
+	backpack = /obj/item/weapon/storage/backpack/clown
+	pda_type = /obj/item/device/pda/clown
+	backpack_contents = list(/obj/item/weapon/bananapeel = 1)
+
+/decl/hierarchy/outfit/job/mime
+	name = OUTFIT_JOB_NAME("Mime")
+	uniform = /obj/item/clothing/under/mime
+	mask = /obj/item/clothing/mask/gas/mime
+	shoes = /obj/item/clothing/shoes/mime
+	head = /obj/item/clothing/head/soft/mime
+	pda_type = /obj/item/device/pda/mime
+	backpack_contents = list(/obj/item/weapon/pen/crayon/mime = 1, /obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing = 1)
