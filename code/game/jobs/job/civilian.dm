@@ -128,7 +128,35 @@
 	minimal_player_age = 10
 	outfit_type = /decl/hierarchy/outfit/job/internal_affairs_agent
 
-/datum/job/lawyer/equip(var/mob/living/carbon/human/H)
-	. = ..()
-	if(.)
-		H.implant_loyalty(H)
+	equip(var/mob/living/carbon/human/H)
+		. = ..()
+		if(.)
+			H.implant_loyalty(H)
+
+// Silly Jobs
+/datum/job/clown
+	title = "Clown"
+	department = "Civilian"
+	department_flag = CIV
+	faction = "Station"
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the head of personnel and your level of humor"
+	selection_color = "#515151"
+	access = list(access_clown_office, access_theatre, access_maint_tunnels)
+	minimal_access = list(access_clown_office, access_theatre)
+	alt_titles = list("Fool")
+	outfit_type = /decl/hierarchy/outfit/job/clown
+
+/datum/job/mime
+	title = "Mime"
+	department = "Civilian"
+	department_flag = CIV
+	faction = "Station"
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the head of personnel and your oath of silence"
+	selection_color = "#515151"
+	access = list(access_mime_office, access_theatre, access_maint_tunnels)
+	minimal_access = list(access_mime_office, access_theatre)
+	outfit_type = /decl/hierarchy/outfit/job/mime
