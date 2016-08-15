@@ -384,6 +384,24 @@
 	desc = "Medical Equipment"
 	region = ACCESS_REGION_MEDBAY
 
+/var/const/access_clown_office = 67
+/datum/access/clown_office
+	id = access_clown_office
+	desc = "Clown's Office"
+	region = ACCESS_REGION_GENERAL
+
+/var/const/access_mime_office = 68
+/datum/access/mime_office
+	id = access_mime_office
+	desc = "Mime's Office"
+	region = ACCESS_REGION_GENERAL
+
+/var/const/access_theatre = 69
+/datum/access/theatre
+	id = access_theatre
+	desc = "Theatre"
+	region = ACCESS_REGION_GENERAL
+
 /******************
 * Central Command *
 ******************/

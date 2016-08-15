@@ -1147,6 +1147,15 @@ area/space/atmosalert()
 	icon_state = "Theatre"
 	sound_env = LARGE_SOFTFLOOR
 
+/area/crew_quarters/clown
+	name = "\improper Clown Office"
+	icon_state = "clown_office"
+	sound_env = SMALL_ENCLOSED
+
+/area/crew_quarters/mime
+	name = "\improper Mime Office"
+	icon_state = "mime_office"
+
 /area/crew_quarters/safe_room
 	name = "\improper Safe Room"
 	icon_state = "head_quarters"
