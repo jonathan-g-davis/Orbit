@@ -66,6 +66,7 @@
 	mask = /obj/item/clothing/mask/gas/clown_hat
 	shoes = /obj/item/clothing/shoes/clown_shoes
 	backpack = /obj/item/weapon/storage/backpack/clown
+	id_type = /obj/item/weapon/card/id/civilian/clown
 	pda_type = /obj/item/device/pda/clown
 	backpack_contents = list(/obj/item/weapon/bananapeel = 1)
 
@@ -75,5 +76,6 @@
 	mask = /obj/item/clothing/mask/gas/mime
 	shoes = /obj/item/clothing/shoes/mime
 	head = /obj/item/clothing/head/soft/mime
+	id_type = /obj/item/weapon/card/id/civilian/mime
 	pda_type = /obj/item/device/pda/mime
 	backpack_contents = list(/obj/item/weapon/pen/crayon/mime = 1, /obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing = 1)

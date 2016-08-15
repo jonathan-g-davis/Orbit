@@ -408,6 +408,12 @@ var/const/NO_EMAG_ACT = -50
 /obj/item/weapon/card/id/civilian/chaplain
 	job_access_type = /datum/job/chaplain
 
+/obj/item/weapon/card/id/civilian/clown
+	job_access_type = /datum/job/clown
+
+/obj/item/weapon/card/id/civilian/mime
+	job_access_type = /datum/job/mime
+
 /obj/item/weapon/card/id/civilian/head //This is not the HoP. There's no position that uses this right now.
 	name = "identification card"
 	desc = "A card which represents common sense and responsibility."
