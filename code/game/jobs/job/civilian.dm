@@ -143,6 +143,8 @@
 	spawn_positions = 1
 	supervisors = "the head of personnel and your level of humor"
 	selection_color = "#515151"
+	economic_modifier = 2
+	//^ a good show always needs funding
 	access = list(access_clown_office, access_theatre, access_maint_tunnels)
 	minimal_access = list(access_clown_office, access_theatre)
 	alt_titles = list("Fool")
@@ -157,6 +159,8 @@
 	spawn_positions = 1
 	supervisors = "the head of personnel and your oath of silence"
 	selection_color = "#515151"
+	economic_modifier = 2
+	//^ a good show always needs funding
 	access = list(access_mime_office, access_theatre, access_maint_tunnels)
 	minimal_access = list(access_mime_office, access_theatre)
 	outfit_type = /decl/hierarchy/outfit/job/mime
