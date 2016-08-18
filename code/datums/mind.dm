@@ -52,6 +52,7 @@
 
 	var/datum/faction/faction 			//associated faction
 	var/datum/changeling/changeling		//changeling holder
+	var/datum/vampire/vampire			//vampire holder
 
 	var/rev_cooldown = 0
 

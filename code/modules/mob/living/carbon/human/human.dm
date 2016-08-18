@@ -86,6 +86,10 @@
 				stat("Chemical Storage", mind.changeling.chem_charges)
 				stat("Genetic Damage Time", mind.changeling.geneticdamage)
 
+			if(mind.vampire)
+				stat("Useable Blood", mind.vampire.blood_usable)
+				stat("Total Blood", mind.vampire.blood_total)
+
 /mob/living/carbon/human/ex_act(severity)
 	if(!blinded)
 		flash_eyes()
