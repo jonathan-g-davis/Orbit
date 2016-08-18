@@ -1,5 +1,5 @@
 /datum/antagonist/proc/can_become_antag(var/datum/mind/player, var/ignore_role)
-	if(player.current && jobban_isbanned(player.current, id))
+	if(player.current && (jobban_isbanned(player.current, id) || id == MODE_THRALL && jobban_isbanned(player.current, MODE_VAMPIRE)))
 		return 0
 
 	if(!ignore_role)
@@ -13,6 +13,8 @@
 		if(config.protect_roles_from_antagonist && (player.assigned_role in protected_jobs))
 			return 0
 		if(player.current && (player.current.status_flags & NO_ANTAG))
+			return 0
+		if(player.current.client.prefs.species in restricted_species)
 			return 0
 	return 1
 
