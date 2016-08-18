@@ -3,6 +3,7 @@
 	// Text shown when becoming this antagonist.
 	var/list/restricted_jobs =     list()   // Jobs that cannot be this antagonist (depending on config)
 	var/list/protected_jobs =      list()   // As above.
+	var/list/restricted_species =  list()	// Currently for just vampire
 
 	// Strings.
 	var/welcome_text = "Cry havoc and let slip the dogs of war!"
