@@ -68,7 +68,7 @@
 	backpack = /obj/item/weapon/storage/backpack/clown
 	id_type = /obj/item/weapon/card/id/civilian/clown
 	pda_type = /obj/item/device/pda/clown
-	backpack_contents = list(/obj/item/weapon/bananapeel = 1)
+	backpack_contents = list(/obj/item/weapon/bananapeel = 1, /obj/item/weapon/book/manual/clownbook = 1)
 
 /decl/hierarchy/outfit/job/mime
 	name = OUTFIT_JOB_NAME("Mime")

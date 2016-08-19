@@ -1198,3 +1198,87 @@
 				</body>
 			</html>
 			"}
+
+/obj/item/weapon/book/manual/clownbook
+	name = "Twisty the Clown's Book of Jokes!"
+	icon_state = "book6"
+	author = "Twisty the Clown"
+	title = "Twisty the Clown's Book of Jokes!"
+	dat = {"<html>
+				<head>
+				<style>
+				h1 {font-size: 18px; margin: 15px 0px 5px;}
+				h2 {font-size: 15px; margin: 15px 0px 5px;}
+				li {margin: 2px 0px 2px 15px;}
+				ul {margin: 5px; padding: 0px;}
+				ol {margin: 5px; padding: 0px 15px;}
+				body {font-size: 13px; font-family: Verdana;}
+				</style>
+				</head>
+				<body>
+
+				<h1><a name="Foreword">Twisty the Clown's Book of Jokes!</a></h1>
+				<I>Or: Witty jokes to entertain the masses!</I><BR>
+
+				<h2><a name="Contents">Contents</a></h2>
+				<ol>
+					<li><a href="#Puns">Twisty's Best Puns</a></li>
+					<li><a href="#Religious">Twisty's Jokes on Religion</a></li>
+					<li><a href="#Homosexual">Twisty Explores Homosexuality</a></li>
+					<li><a href="#Dirty">Twisty Gets Down and Dirty</a></li>
+				</ol>
+				<br>
+				Every decent Clown in the galaxy knows it takes skill and dedication to perform pranks on the crew of their station without getting yourself mugged! Well Twisty is here to give you a few lighthearted jokes to ease times of tension.
+				<BR><BR>
+
+				<h2><a name="Puns">Twisty's Best Puns</a></h2>
+				<ul>
+					<li>What's the worst thing about throwing a party in space? You have to planet!</li>
+					<li>Yesterday a clown held a door open for me. I thought it was a nice Jester!</li>
+					<li>How do you make antifreeze? Steal her blanket!</li>
+					<li>I just went to an emotional wedding. Even the cake was in tiers!</li>
+					<li>Why couldn't the bike stand? It was two tired!</li>
+					<li>What do you do when a chemist dies? Barium!</li>
+				</ul><br>
+
+				<h2><a name="Religious">Twisty's Jokes on Religion</a></h2>
+				<ul>
+					<li>What does a Christmas tree and a priest have in common? Their Balls are both for decoration!</li>
+					<li>What do you call a nun in a wheelchair? Virgin Mobile!</li>
+					<li>How can you tell if you're in a gay church? Only half the congregation is kneeling!</li>
+					<li>How many Catholics does it take to change a lightbulb? None, they use a candle.</li>
+					<li>Why do Jewish men watch porn backwards? They like to see the hooker give the money back!</li>
+					<li>What is the definition of a queer Jew? Someone who likes girls more than money!</li>
+					<li>Why do Jewish men need to be circumcised? A Jewish girl won touch anything that isn't 10% off!</li>
+					<li>How does an athiest girl have her hair done? In big bangs!</li>
+					<li>How do you make an athiest appreciate life? Break his legs.</li>
+
+				</ul><br>
+
+				<h2><a name="Homosexual">Twisty's Jokes on Homosexuality</a></h2>
+				<ul>
+					<li>How do you fit three homosexuals on one barstool? Turn it upside-down!</li>
+					<li>What do you call an annoying gay man? A pain in the ass</li>
+					<li>How do you say homosexual in hebrew? Heblew</li>
+					<li>Did you know homosexuals can't be vegetarians? They all eat meat!</li>
+					<li>Did you know 75% of the gay population was born that way? The other 25% were sucked in!</li>
+					<li>What do you call a gay midget? A low blow!</li>
+
+				</ul><br>
+
+				<h2><a name="Dirty">Twisty's Dirty Jokes</a></h2>
+				<ul>
+					<li>When do you kick a midget in the face? When he says your girlfriends hair smells nice!</li>
+					<li>Do you know what bird represents love? The Swallow!</li>
+					<li>Why don't orphans play baseball? They don't know where home is!</li>
+					<li>What do you call an anorexic with a yeast infection? A quarterpounder with cheese!</li>
+					<li>What do you call a bunch of retarted kids in a pool? Vegetable soup!</li>
+				</ul><br>
+
+
+				</body>
+			</html>
+			"}
+
+
+
