@@ -146,9 +146,16 @@
 	economic_modifier = 2
 	//^ a good show always needs funding
 	access = list(access_clown_office, access_theatre, access_maint_tunnels)
-	minimal_access = list(access_clown_office, access_theatre)
+	minimal_access = list(access_clown_office, access_theatre, access_maint_tunnels)
 	alt_titles = list("Fool","Jester")
 	outfit_type = /decl/hierarchy/outfit/job/clown
+
+	equip(var/mob/living/carbon/human/H)
+		. = ..()
+		if(.)
+			H.mutations.Add(CLUMSY)
+
+
 
 /datum/job/mime
 	title = "Mime"

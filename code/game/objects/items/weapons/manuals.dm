@@ -1201,7 +1201,7 @@
 
 /obj/item/weapon/book/manual/clownbook
 	name = "Twisty the Clown's Book of Jokes!"
-	icon_state = "book6"
+	icon_state = "clownbook"
 	author = "Twisty the Clown"
 	title = "Twisty the Clown's Book of Jokes!"
 	dat = {"<html>
