@@ -78,7 +78,7 @@
 
 /datum/dna/gene/disability/clumsy
 	name="Clumsiness"
-	activation_message="You feel lightheaded."
+	activation_message="You feel prone to accident."
 	mutation=CLUMSY
 
 	New()
